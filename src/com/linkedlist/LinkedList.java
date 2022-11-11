@@ -1,5 +1,4 @@
 package com.linkedlist;
-
 public class LinkedList {
     static class Node{
         int data;
@@ -17,7 +16,6 @@ public class LinkedList {
         Node newNode= new Node(data);
         if(head == null){
             head =newNode;
-            tail =newNode;
         }else
         {
             tail.next=newNode;
@@ -25,17 +23,23 @@ public class LinkedList {
         }
         tail = newNode;
     }
-
-    //delete The First element in linked list
-    public void pop(){
+    //delete The last element in linked list
+    public void popLast(){
         if (head == null){
             System.out.println(" list is empty");
-            return;
         }
         else {
-            if (head != null){
+            if (head != tail){
                 head =head.next;
-            }else {
+                Node current = head;
+                while (current.next.next != null)
+                {
+                    current =current.next;
+                }
+                tail =current;
+                tail.next =null;
+            }else
+            {
                 head=tail=null;
             }
         }
@@ -44,22 +48,28 @@ public class LinkedList {
     //print linked list
     public void printLinkedList(){
         Node current = head;
+        if (head == null) {
+            System.out.println("Linked list is empty");
+            return;
+        }
         while (current !=null){
             System.out.println(current.data+ "");
-            current = current.next;
+            current=current.next;
         }
     }
     public static void main(String [] args){
         System.out.println("Welcome to Linked list Program ");
-        System.out.println("Linked list is");
         LinkedList linkedList=new LinkedList();
+        System.out.println(" linked list");
         linkedList.addToLinkedList(56);
         linkedList.addToLinkedList(30);
         linkedList.addToLinkedList(70);
         linkedList.printLinkedList();
         System.out.println();
-        linkedList.pop();
-        System.out.println("After removing first element from  linked list ");
+        linkedList.popLast();
+        System.out.println(" After deleting last element ");
+        System.out.println(" linked list");
         linkedList.printLinkedList();
+
     }
 }
